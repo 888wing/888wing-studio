@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         'ink-red': '#8B1A1A',
+        'ink-red-bright': '#E85D5D',
         'ink-black': '#0A0A0A',
         'ink-yellow': '#E8C547',
         paper: '#F4EFE6',
