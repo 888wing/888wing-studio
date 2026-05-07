@@ -3,6 +3,7 @@ import { archiveItems, type ArchiveItem } from '../data/archive';
 import { filterArchive } from '../lib/archive';
 import { gsap } from 'gsap';
 import { prefersReducedMotion } from '../lib/motion';
+import ArchiveTile from './ArchiveTile';
 
 const TAGS: (ArchiveItem['tag'] | null)[] = [null, 'GAME', 'TOOL', 'AI', 'WEB'];
 
@@ -45,7 +46,7 @@ export default function ArchiveGrid() {
             onMouseEnter={() => handleHover(i)}
             className="block border-2 border-ink-black bg-paper p-3"
           >
-            <img src={it.thumb} alt={it.name} className="w-full aspect-square object-cover mb-3" style={{ filter: 'grayscale(1) contrast(1.2)' }} />
+            <ArchiveTile item={it} index={i} />
             <div className="font-display text-lg leading-tight">{it.name}</div>
             <div className="font-mono text-[10px] text-ink-red mt-1">{it.tag} · {it.year}</div>
             <div className="font-mono text-xs mt-1 text-ink-black/70">{it.tagline}</div>

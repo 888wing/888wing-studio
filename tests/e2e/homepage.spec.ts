@@ -14,5 +14,5 @@ test('homepage shows all 6 sections', async ({ page }) => {
   // archive teaser
   await expect(page.getByRole('heading', { name: '23 MORE' })).toBeVisible();
   // colophon
-  await expect(page.getByText('⊕ COLOPHON')).toBeVisible();
+  await expect(page.getByText('ADDRESS')).toBeVisible();
 });

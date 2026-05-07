@@ -1,23 +1,31 @@
 ---
 import InkStrip from './InkStrip.astro';
+const today = '2026.05.07';
 ---
-<footer class="bg-paper border-t-4 border-ink-black px-8 py-16">
-  <div class="max-w-[1440px] mx-auto grid grid-cols-12 gap-6 font-mono text-sm">
-    <div class="col-span-12 md:col-span-4">
-      <span class="text-ink-red">⊕ COLOPHON</span>
-      <p class="mt-4">Set in Tusker Grotesk + JetBrains Mono.<br/>Printed on screen, Hong Kong, 2026.</p>
+<footer class="relative bg-paper border-t-4 border-ink-black px-8 py-16">
+  <div class="max-w-[1440px] mx-auto grid grid-cols-12 gap-6 font-mono text-xs">
+    <div class="col-span-6 md:col-span-2">
+      <span class="text-ink-red-bright bg-ink-black px-2 py-1 inline-block mb-3">ADDRESS</span>
+      <p class="leading-relaxed">Flat B, 12/F, Block 2<br/>Industrial Centre<br/>456-458 Castle Peak Road<br/>Kowloon, Hong Kong</p>
     </div>
-    <div class="col-span-6 md:col-span-3">
-      <span class="text-ink-red">CONTACT</span>
-      <p class="mt-4"><a href="mailto:nano122090@gmail.com" class="underline">nano122090@gmail.com</a></p>
+    <div class="col-span-6 md:col-span-2">
+      <span class="text-ink-red-bright bg-ink-black px-2 py-1 inline-block mb-3">EMAIL</span>
+      <p class="leading-relaxed"><a href="mailto:nano122090@gmail.com" class="underline">nano122090@gmail.com</a></p>
     </div>
-    <div class="col-span-6 md:col-span-3">
-      <span class="text-ink-red">CODE</span>
-      <p class="mt-4"><a href="https://github.com/888wing/888wing-studio" class="underline">github.com/888wing/888wing-studio</a></p>
+    <div class="col-span-6 md:col-span-2">
+      <span class="text-ink-red-bright bg-ink-black px-2 py-1 inline-block mb-3">GITHUB</span>
+      <p class="leading-relaxed"><a href="https://github.com/888wing/888wing-studio" class="underline">github.com/888wing/888wing-studio</a></p>
     </div>
-    <div class="col-span-12 md:col-span-2 text-right">
-      <span class="text-ink-red">⊕</span>
-      <p class="mt-4 text-xs">v0.1<br/>2026.05</p>
+    <div class="col-span-6 md:col-span-2">
+      <span class="text-ink-red-bright bg-ink-black px-2 py-1 inline-block mb-3">PRINT INFO</span>
+      <p class="leading-relaxed">RISOGRAPH EDITION #1<br/>4-COLOR PROCESS<br/>CMYK<br/>PAPER: 120GSM UNCOATED</p>
+    </div>
+    <div class="col-span-6 md:col-span-2">
+      <span class="text-ink-red-bright bg-ink-black px-2 py-1 inline-block mb-3">DATE</span>
+      <p class="leading-relaxed">{today}<br/>14:32 HKT</p>
+    </div>
+    <div class="col-span-6 md:col-span-2 flex items-end justify-end">
+      <img src="/stamp.svg" alt="Studio seal" class="w-24 h-24 mix-blend-multiply" />
     </div>
   </div>
   <InkStrip />

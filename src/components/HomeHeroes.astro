@@ -1,10 +1,26 @@
 ---
 import HalftoneImage from './HalftoneImage.astro';
 const heroes = [
-  { num: '01', name: 'DOVA TRAVEL', tag: 'TRAVEL SAAS · OPERATING SYSTEM', href: '/work/dova', img: '/lab/sample.jpg' },
-  { num: '02', name: 'LOOPLINE', tag: 'iOS · PHASER · IAP', href: '/work/loopline', img: '/lab/sample.jpg' },
-  { num: '03', name: 'PRODRIVER HUB', tag: 'FLUTTER · CROSS-PLATFORM', href: '/work/prodriver', img: '/lab/sample.jpg' },
-  { num: '04', name: 'LATENT', tag: 'macOS · AI CULLING', href: '/work/latent', img: '/lab/sample.jpg' },
+  {
+    num: '01', name: 'DOVA TRAVEL', tag: 'TRAVEL SAAS · OPERATING SYSTEM',
+    href: '/work/dova', img: '/lab/sample.jpg',
+    panel: { title: 'DOVA TRAVEL', rows: [['DESTINATION', '—'], ['DATES', '—'], ['PEOPLE', '—']] }
+  },
+  {
+    num: '02', name: 'LOOPLINE', tag: 'iOS · PHASER · IAP',
+    href: '/work/loopline', img: '/lab/sample.jpg',
+    panel: { title: 'LOOPLINE', rows: [['STATUS', 'RUNNING'], ['VERSION', '2.1.4'], ['PEOPLE', '480 RPM']] }
+  },
+  {
+    num: '03', name: 'PRODRIVER HUB', tag: 'FLUTTER · CROSS-PLATFORM',
+    href: '/work/prodriver', img: '/lab/sample.jpg',
+    panel: { title: 'PRODRIVER HUB', rows: [['FLEET', 'OVERVIEW'], ['VEHICLES', '128'], ['ON', '97%']] }
+  },
+  {
+    num: '04', name: 'LATENT', tag: 'macOS · AI CULLING',
+    href: '/work/latent', img: '/lab/sample.jpg',
+    panel: { title: 'LATENT', rows: [['SPACE', 'GENERATIVE'], ['DOTS', '5×3'], ['MODE', 'CULL']] }
+  },
 ];
 ---
 <section class="bg-paper px-8 border-t-4 border-ink-black">
@@ -21,7 +37,25 @@ const heroes = [
         <span class="font-mono text-ink-red mt-6 inline-block">→ READ CASE</span>
       </div>
       <div class={`col-span-12 md:col-span-7 ${i%2===0 ? 'md:order-2' : 'md:order-1'}`}>
-        <HalftoneImage src={h.img} alt={h.name} dotSize={8} />
+        <div class="relative">
+          <HalftoneImage src={h.img} alt={h.name} dotSize={8} />
+          <div class="absolute right-4 bottom-4 bg-ink-black text-paper font-mono text-[10px] p-3 min-w-[180px] shadow-lg">
+            <div class="text-ink-red-bright text-xs mb-2 font-bold tracking-wide">{h.panel.title}</div>
+            {h.panel.rows.map(([k, v]) => (
+              <div class="flex justify-between gap-4 py-1 border-t border-paper/20 first:border-t-0">
+                <span class="text-paper/60">{k}</span>
+                <span class="text-paper">{v}</span>
+              </div>
+            ))}
+            {h.num === '04' && (
+              <div class="mt-2 pt-2 border-t border-paper/20 grid grid-cols-5 gap-1">
+                {Array.from({ length: 15 }).map(() => (
+                  <span class="block w-1 h-1 bg-paper/60"></span>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </a>
   ))}
