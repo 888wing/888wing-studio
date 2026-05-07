@@ -44,7 +44,7 @@ export default function ArchiveGrid() {
             data-card
             href={it.href}
             onMouseEnter={() => handleHover(i)}
-            className="block border-2 border-ink-black bg-paper p-3"
+            className="block border-2 border-ink-black bg-paper p-3 transition-all hover:border-ink-red hover:bg-ink-yellow/5 cursor-pointer"
           >
             <ArchiveTile item={it} index={i} />
             <div className="font-display text-lg leading-tight">{it.name}</div>
