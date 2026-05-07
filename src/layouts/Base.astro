@@ -4,6 +4,7 @@ import GridOverlay from '../components/GridOverlay.astro';
 import RegistrationCursor from '../components/RegistrationCursor.astro';
 import MotionProvider from '../components/MotionProvider.astro';
 import RedWedge from '../components/RedWedge.astro';
+import TopStrip from '../components/TopStrip.tsx';
 import { ViewTransitions } from 'astro:transitions';
 const { title = 'CHUI SIU FAI' } = Astro.props;
 ---
@@ -19,6 +20,7 @@ const { title = 'CHUI SIU FAI' } = Astro.props;
     <ViewTransitions />
   </head>
   <body>
+    <TopStrip client:load />
     <MotionProvider />
     <GridOverlay />
     <RegistrationCursor />
