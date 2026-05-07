@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+const tricks = [
+  ['01', 'Press Assembly', '/lab/press-assembly'],
+  ['02', 'Red Wedge', '/lab/red-wedge'],
+  ['03', 'Diagonal Slice', '/lab/diagonal-slice'],
+  ['04', 'Movable Type', '/lab/movable-type'],
+  ['05', 'Halftone Reveal', '/lab/halftone-reveal'],
+  ['06', 'Registration Cursor', '/lab/cursor'],
+  ['07', 'Grid Tilt', '/lab/grid-tilt'],
+  ['08', 'Kinetic Type', '/lab/kinetic-type'],
+  ['09', 'Ink Bleed', '/lab/ink-bleed'],
+  ['10', 'Ink Strip', '/lab/ink-strip'],
+];
+---
+<Base title="LAB / 10 TRICKS">
+  <main class="p-12">
+    <h1 class="font-display text-7xl mb-12">LAB · 10 TRICKS</h1>
+    <ul class="space-y-2 font-mono text-xl">
+      {tricks.map(([num, name, href]) => (
+        <li>
+          <a href={href} class="text-ink-black hover:text-ink-red transition-colors">
+            <span class="text-ink-red">{num}</span> · {name}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Base>
