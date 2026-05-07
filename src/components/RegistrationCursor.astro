@@ -1,45 +1,86 @@
 ---
 // src/components/RegistrationCursor.astro
 ---
-<div id="reg-cursor" class="pointer-events-none fixed left-0 top-0 z-[9999] mix-blend-difference" style="will-change:transform;transform:translate(-100px,-100px)">
+<div id="reg-cursor" class="reg-cursor pointer-events-none fixed left-0 top-0 z-[9999] mix-blend-difference" style="will-change:transform;transform:translate(-100px,-100px) scale(1)">
   <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
     <circle cx="16" cy="16" r="14" stroke="white" stroke-width="1.5" />
     <line x1="16" y1="2" x2="16" y2="30" stroke="white" stroke-width="1.5" />
     <line x1="2" y1="16" x2="30" y2="16" stroke="white" stroke-width="1.5" />
   </svg>
 </div>
-<script>
-  function initRegCursor() {
-    if ((window as any).__cursorInit) return;
 
-    // Touch device — bail out
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
-
-    // Reduced motion — let native cursor show
-    if (typeof window.matchMedia === 'function' &&
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return;
+<style is:global>
+  /* Hide native cursor only when custom cursor is appropriate */
+  @media (hover: hover) and (pointer: fine) {
+    @media not (prefers-reduced-motion: reduce) {
+      body { cursor: none; }
+      a, button, [role="button"] { cursor: none; }
     }
+  }
+  /* Hide our custom cursor when the user prefers reduced motion or has touch */
+  @media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+    .reg-cursor { display: none !important; }
+  }
+</style>
+
+<script>
+  // Module-scoped state: persists across astro:page-load (script bundled once).
+  let rafId: number | null = null;
+  let mouseListener: ((e: MouseEvent) => void) | null = null;
+  let overListener: ((e: Event) => void) | null = null;
+  let outListener: ((e: Event) => void) | null = null;
+  let tx = 0, ty = 0, x = 0, y = 0, scale = 1, targetScale = 1;
+
+  function isTouchOrCoarse(): boolean {
+    return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0)
+      || (typeof window.matchMedia === 'function'
+          && window.matchMedia('(pointer: coarse)').matches);
+  }
+  function reduceMotion(): boolean {
+    return typeof window.matchMedia === 'function'
+      && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  function teardown() {
+    if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
+    if (mouseListener) { document.removeEventListener('mousemove', mouseListener); mouseListener = null; }
+    if (overListener) { document.removeEventListener('mouseover', overListener); overListener = null; }
+    if (outListener) { document.removeEventListener('mouseout', outListener); outListener = null; }
+  }
+
+  function init() {
+    teardown(); // always start clean
+    if (isTouchOrCoarse() || reduceMotion()) return;
 
     const cursor = document.getElementById('reg-cursor');
     if (!cursor) return;
-    (window as any).__cursorInit = true;
 
-    let x = 0, y = 0, tx = 0, ty = 0, scale = 1;
-    document.addEventListener('mousemove', (e) => { tx = e.clientX - 16; ty = e.clientY - 16; });
+    mouseListener = (e: MouseEvent) => { tx = e.clientX - 16; ty = e.clientY - 16; };
+    document.addEventListener('mousemove', mouseListener);
+
+    // Event delegation handles all current AND future a/button elements
+    overListener = (e: Event) => {
+      const t = e.target as HTMLElement | null;
+      if (t && (t.closest('a, button, [role="button"]'))) targetScale = 1.8;
+    };
+    outListener = (e: Event) => {
+      const t = e.target as HTMLElement | null;
+      if (t && (t.closest('a, button, [role="button"]'))) targetScale = 1;
+    };
+    document.addEventListener('mouseover', overListener);
+    document.addEventListener('mouseout', outListener);
+
     function loop() {
       x += (tx - x) * 0.25;
       y += (ty - y) * 0.25;
+      scale += (targetScale - scale) * 0.25; // smooth scale lerp
       cursor!.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
-      requestAnimationFrame(loop);
+      rafId = requestAnimationFrame(loop);
     }
-    loop();
-    document.querySelectorAll('a, button').forEach((el) => {
-      el.addEventListener('mouseenter', () => { scale = 1.8; });
-      el.addEventListener('mouseleave', () => { scale = 1; });
-    });
-    document.body.style.cursor = 'none';
+    rafId = requestAnimationFrame(loop);
   }
-  initRegCursor();
-  document.addEventListener('astro:page-load', initRegCursor);
+
+  init();
+  document.addEventListener('astro:page-load', init);
+  document.addEventListener('astro:before-preparation', teardown);
 </script>
