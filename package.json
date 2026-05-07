@@ -12,7 +12,8 @@
     "astro": "astro",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "deploy": "npm run build && wrangler pages deploy dist --project-name=888wing-studio --branch=feat/scaffold-portfolio --commit-dirty=true"
   },
   "dependencies": {
     "@astrojs/mdx": "^3.1.9",

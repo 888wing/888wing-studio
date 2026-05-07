@@ -15,10 +15,20 @@ export default function TopStrip() {
     return () => clearInterval(id);
   }, []);
   return (
-    <div className="top-strip bg-ink-black text-paper font-mono text-xs flex items-center justify-between px-4 py-2 border-b-2 border-ink-red sticky top-0 z-30">
-      <span><span className="text-ink-red-bright">●REC</span> &nbsp; HKT {time}</span>
-      <span>PORTFOLIO / 2026 / CHUI SIU FAI</span>
-      <span>v0.1 · ⊕ ⊕ ⊕</span>
+    <div className="top-strip bg-ink-black text-paper font-mono text-xs flex items-center gap-4 px-4 py-2 border-b-2 border-ink-red sticky top-0 z-30 overflow-hidden whitespace-nowrap">
+      <span className="text-ink-red-bright">● REC</span>
+      <span>HKT {time}</span>
+      <span>PORTFOLIO/2026</span>
+      <span
+        aria-hidden="true"
+        role="presentation"
+        className="flex-1 self-center h-px"
+        style={{
+          backgroundImage:
+            'repeating-linear-gradient(to right, rgba(244,239,230,0.4) 0, rgba(244,239,230,0.4) 8px, transparent 8px, transparent 14px)',
+        }}
+      ></span>
+      <span className="text-paper">BUILDING THINGS. BREAKING PATTERNS. SHIPPING.</span>
     </div>
   );
 }

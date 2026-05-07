@@ -18,11 +18,13 @@ const { title = 'CHUI SIU FAI' } = Astro.props;
     <SEO title={title} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@400;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,900;125,900&family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@400;900&display=swap" rel="stylesheet" />
     <ViewTransitions />
   </head>
   <body>
     <TopStrip client:load />
+    <div class="paper-noise pointer-events-none fixed inset-0 z-[5] mix-blend-multiply opacity-30" aria-hidden="true"
+         style="background-image: url('/textures/paper-noise.jpg'); background-size: cover; background-attachment: fixed;"></div>
     <MotionProvider />
     <GridOverlay />
     <RegistrationCursor />

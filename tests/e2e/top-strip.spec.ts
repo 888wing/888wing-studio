@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 test('top strip mounts with REC indicator', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('text=●REC')).toBeVisible();
-  await expect(page.locator('text=PORTFOLIO / 2026')).toBeVisible();
+  await expect(page.getByText(/REC/).first()).toBeVisible();
+  await expect(page.locator('text=PORTFOLIO/2026')).toBeVisible();
   // wait for clock to tick (initial is --:--:--)
   await page.waitForTimeout(1500);
   const text = await page.textContent('body');

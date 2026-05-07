@@ -14,3 +14,10 @@
      the borderRadius plugin in tailwind.config.mjs. */
   *, *::before, *::after { border-radius: 0 !important; }
 }
+
+@layer utilities {
+  .font-display {
+    font-stretch: 125%;
+    font-weight: 900;
+  }
+}

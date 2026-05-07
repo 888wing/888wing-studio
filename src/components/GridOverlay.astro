@@ -1,17 +1,37 @@
 ---
 // src/components/GridOverlay.astro
 ---
-<div class="grid-overlay pointer-events-none fixed inset-0 z-50 hidden" data-grid aria-hidden="true">
+<!-- Grid columns -->
+<div class="grid-overlay pointer-events-none fixed inset-0 z-[1] opacity-15" data-grid aria-hidden="true">
   <div class="mx-auto h-full max-w-[1440px] px-6 grid grid-cols-12 gap-6">
-    {Array.from({ length: 12 }).map((_, i) => (
-      <div class="h-full border-l border-r border-ink-red/20 relative">
-        <span class="absolute top-2 left-1 font-mono text-[10px] text-ink-red/60">
-          {String(i + 1).padStart(2, '0')}
-        </span>
-      </div>
+    {Array.from({ length: 12 }).map(() => (
+      <div class="h-full border-l border-r border-ink-black/30 relative"></div>
     ))}
   </div>
 </div>
+
+<!-- Corner registration marks (always visible at low opacity) -->
+<svg class="reg-mark fixed top-2 left-2 z-[1] pointer-events-none opacity-40" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+  <circle cx="10" cy="10" r="8" stroke="#0A0A0A" stroke-width="1"/>
+  <line x1="10" y1="0" x2="10" y2="20" stroke="#0A0A0A" stroke-width="1"/>
+  <line x1="0" y1="10" x2="20" y2="10" stroke="#0A0A0A" stroke-width="1"/>
+</svg>
+<svg class="reg-mark fixed top-2 right-2 z-[1] pointer-events-none opacity-40" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+  <circle cx="10" cy="10" r="8" stroke="#0A0A0A" stroke-width="1"/>
+  <line x1="10" y1="0" x2="10" y2="20" stroke="#0A0A0A" stroke-width="1"/>
+  <line x1="0" y1="10" x2="20" y2="10" stroke="#0A0A0A" stroke-width="1"/>
+</svg>
+<svg class="reg-mark fixed bottom-2 left-2 z-[1] pointer-events-none opacity-40" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+  <circle cx="10" cy="10" r="8" stroke="#0A0A0A" stroke-width="1"/>
+  <line x1="10" y1="0" x2="10" y2="20" stroke="#0A0A0A" stroke-width="1"/>
+  <line x1="0" y1="10" x2="20" y2="10" stroke="#0A0A0A" stroke-width="1"/>
+</svg>
+<svg class="reg-mark fixed bottom-2 right-2 z-[1] pointer-events-none opacity-40" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+  <circle cx="10" cy="10" r="8" stroke="#0A0A0A" stroke-width="1"/>
+  <line x1="10" y1="0" x2="10" y2="20" stroke="#0A0A0A" stroke-width="1"/>
+  <line x1="0" y1="10" x2="20" y2="10" stroke="#0A0A0A" stroke-width="1"/>
+</svg>
+
 {import.meta.env.DEV && (
   <script>
     function setupGridToggle() {
@@ -20,7 +40,11 @@
       document.addEventListener('keydown', (e) => {
         if (e.key === 'g' && (e.metaKey || e.ctrlKey)) {
           e.preventDefault();
-          document.querySelector('[data-grid]')?.classList.toggle('hidden');
+          const el = document.querySelector('[data-grid]');
+          if (el) {
+            el.classList.toggle('opacity-15');
+            el.classList.toggle('opacity-60');
+          }
         }
       });
     }

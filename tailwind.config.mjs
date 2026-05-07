@@ -11,7 +11,7 @@ export default {
         paper: '#F4EFE6',
       },
       fontFamily: {
-        display: ['"Tusker Grotesk"', 'system-ui', 'sans-serif'],
+        display: ['"Archivo"', '"Tusker Grotesk"', 'system-ui', 'sans-serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
         'tc-serif': ['"Noto Serif TC"', 'serif'],
