@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import GridOverlay from '../components/GridOverlay.astro';
 const { title = 'CHUI SIU FAI' } = Astro.props;
 ---
 <!doctype html>
@@ -12,5 +13,8 @@ const { title = 'CHUI SIU FAI' } = Astro.props;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@400;900&display=swap" rel="stylesheet" />
   </head>
-  <body><slot /></body>
+  <body>
+    <GridOverlay />
+    <slot />
+  </body>
 </html>

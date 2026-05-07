@@ -1,0 +1,22 @@
+---
+// src/components/GridOverlay.astro
+---
+<div class="grid-overlay pointer-events-none fixed inset-0 z-50 hidden" data-grid>
+  <div class="mx-auto h-full max-w-[1440px] px-6 grid grid-cols-12 gap-6">
+    {Array.from({ length: 12 }).map((_, i) => (
+      <div class="h-full border-l border-r border-ink-red/20 relative">
+        <span class="absolute top-2 left-1 font-mono text-[10px] text-ink-red/60">
+          {String(i + 1).padStart(2, '0')}
+        </span>
+      </div>
+    ))}
+  </div>
+</div>
+<script>
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'g' && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      document.querySelector('[data-grid]')?.classList.toggle('hidden');
+    }
+  });
+</script>
