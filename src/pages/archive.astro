@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import ArchiveGrid from '../components/ArchiveGrid.tsx';
+---
+<Base title="ARCHIVE / 23">
+  <main class="bg-ink-black text-paper min-h-screen px-8 py-16">
+    <header class="mb-16">
+      <span class="font-mono text-ink-red text-xs">§ ARCHIVE · 23</span>
+      <h1 class="font-display text-9xl mt-4 -rotate-1">EVERYTHING</h1>
+      <p class="font-mono text-sm mt-4 max-w-md">All shipped repos. Every dead-end. Filter by category.</p>
+    </header>
+    <ArchiveGrid client:load />
+    <a href="/" class="font-mono text-ink-red mt-16 inline-block">← HOME</a>
+  </main>
+</Base>
