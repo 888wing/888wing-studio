@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /lab/
+
+Sitemap: https://888wing-studio.pages.dev/sitemap-index.xml
