@@ -1,0 +1,18 @@
+---
+const { href, children } = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+<Tag href={href} class="ink-btn relative inline-block px-6 py-3 font-mono uppercase tracking-wide bg-ink-red text-paper border-2 border-ink-black overflow-visible">
+  <slot />
+</Tag>
+<style>
+  .ink-btn { transition: transform 200ms cubic-bezier(0.7,0,0.3,1); }
+  .ink-btn::before {
+    content: ''; position: absolute; inset: -2px;
+    background: #8B1A1A; z-index: -1;
+    transition: inset 200ms cubic-bezier(0.7,0,0.3,1), opacity 200ms;
+    opacity: 0;
+  }
+  .ink-btn:hover::before { inset: -4px -6px; opacity: 1; }
+  .ink-btn:hover { transform: translate(-1px, -1px); }
+</style>
