@@ -1,0 +1,7 @@
+@media print {
+  body { background: white !important; color: black !important; cursor: auto !important; }
+  #reg-cursor, #red-wedge, .top-strip, .ink-strip { display: none !important; }
+  details, [data-annex], [aria-controls] + div { display: block !important; opacity: 1 !important; clip-path: none !important; }
+  * { animation: none !important; transition: none !important; transform: none !important; }
+  a::after { content: ' (' attr(href) ')'; font-size: 0.8em; color: #666; }
+}

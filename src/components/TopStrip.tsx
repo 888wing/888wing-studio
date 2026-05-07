@@ -15,7 +15,7 @@ export default function TopStrip() {
     return () => clearInterval(id);
   }, []);
   return (
-    <div className="bg-ink-black text-paper font-mono text-xs flex items-center justify-between px-4 py-2 border-b-2 border-ink-red sticky top-0 z-30">
+    <div className="top-strip bg-ink-black text-paper font-mono text-xs flex items-center justify-between px-4 py-2 border-b-2 border-ink-red sticky top-0 z-30">
       <span><span className="text-ink-red">●REC</span> &nbsp; HKT {time}</span>
       <span>PORTFOLIO / 2026 / CHUI SIU FAI</span>
       <span>v0.1 · ⊕ ⊕ ⊕</span>
