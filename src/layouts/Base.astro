@@ -3,6 +3,7 @@ import '../styles/global.css';
 import GridOverlay from '../components/GridOverlay.astro';
 import RegistrationCursor from '../components/RegistrationCursor.astro';
 import MotionProvider from '../components/MotionProvider.astro';
+import RedWedge from '../components/RedWedge.astro';
 const { title = 'CHUI SIU FAI' } = Astro.props;
 ---
 <!doctype html>
@@ -19,6 +20,7 @@ const { title = 'CHUI SIU FAI' } = Astro.props;
     <MotionProvider />
     <GridOverlay />
     <RegistrationCursor />
+    <RedWedge />
     <slot />
   </body>
 </html>
