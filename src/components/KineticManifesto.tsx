@@ -6,7 +6,8 @@ import { prefersReducedMotion } from '../lib/motion';
 gsap.registerPlugin(ScrollTrigger);
 
 type Phrase = {
-  text: string;
+  html?: string;
+  text?: string;
   size: string;
   rotate: number;
   align: 'left' | 'center' | 'right';
@@ -44,21 +45,23 @@ export default function KineticManifesto({ phrases }: { phrases: Phrase[] }) {
   }, []);
   return (
     <div ref={ref} className="space-y-2 py-32">
-      {phrases.map((p, i) => (
-        <p
-          key={i}
-          data-phrase
-          data-rotate={p.rotate}
-          className={`font-display ${p.size} ${ALIGN_CLASS[p.align]}`}
-          style={{
+      {phrases.map((p, i) => {
+        const common = {
+          'data-phrase': '',
+          'data-rotate': p.rotate,
+          className: `font-display ${p.size} ${ALIGN_CLASS[p.align]}`,
+          style: {
             color: p.color ?? 'inherit',
             transform: `rotate(${p.rotate}deg)`,
-            transformOrigin: 'left center',
-          }}
-        >
-          {p.text}
-        </p>
-      ))}
+            transformOrigin: 'left center' as const,
+          },
+        };
+        return p.html ? (
+          <p key={i} {...common} dangerouslySetInnerHTML={{ __html: p.html }} />
+        ) : (
+          <p key={i} {...common}>{p.text}</p>
+        );
+      })}
     </div>
   );
 }

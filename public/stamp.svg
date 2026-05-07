@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="Red stamp style logo">
+  <title>Red stamp style logo</title>
+  <rect width="1024" height="1024" fill="#ffffff"/>
+  <g fill="none" stroke="#E82222" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+    <!-- outer stamp frame -->
+    <rect x="212" y="210" width="600" height="603" rx="26" ry="26" stroke-width="24"/>
+
+    <!-- left character -->
+    <path d="M283 292 L283 389"/>
+    <path d="M351 265 L351 456" stroke-width="24"/>
+    <path d="M418 292 L418 389"/>
+    <path d="M272 454 L431 454" stroke-width="24"/>
+    <path d="M319 454 L319 600 L280 747" stroke-width="24"/>
+    <path d="M386 454 L386 727 L536 633" stroke-width="24"/>
+
+    <!-- right character upper frame -->
+    <path d="M477 369 L477 302 Q477 285 494 285 L733 285 Q745 285 745 298 L745 369" stroke-width="24"/>
+    <path d="M518 364 L704 364"/>
+    <path d="M611 332 L611 756" stroke-width="24"/>
+
+    <!-- right character middle boxes -->
+    <path d="M489 427 L733 427 Q738 427 738 433 L738 579 Q738 584 733 584 L489 584 Q484 584 484 579 L484 433 Q484 427 489 427 Z" stroke-width="24"/>
+    <path d="M489 503 L733 503" stroke-width="22"/>
+    <path d="M489 580 L733 580" stroke-width="22"/>
+    <path d="M611 427 L611 584" stroke-width="22"/>
+
+    <!-- lower right stroke -->
+    <path d="M611 657 L756 657" stroke-width="24"/>
+  </g>
+</svg>

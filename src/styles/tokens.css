@@ -19,5 +19,6 @@
   .font-display {
     font-stretch: 125%;
     font-weight: 900;
+    font-variation-settings: "wdth" 125, "wght" 900;
   }
 }
