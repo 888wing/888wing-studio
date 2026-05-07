@@ -1,7 +1,7 @@
 ---
 // src/components/GridOverlay.astro
 ---
-<div class="grid-overlay pointer-events-none fixed inset-0 z-50 hidden" data-grid>
+<div class="grid-overlay pointer-events-none fixed inset-0 z-50 hidden" data-grid aria-hidden="true">
   <div class="mx-auto h-full max-w-[1440px] px-6 grid grid-cols-12 gap-6">
     {Array.from({ length: 12 }).map((_, i) => (
       <div class="h-full border-l border-r border-ink-red/20 relative">
@@ -12,11 +12,19 @@
     ))}
   </div>
 </div>
-<script>
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'g' && (e.metaKey || e.ctrlKey)) {
-      e.preventDefault();
-      document.querySelector('[data-grid]')?.classList.toggle('hidden');
+{import.meta.env.DEV && (
+  <script>
+    function setupGridToggle() {
+      if ((window as any).__gridInit) return;
+      (window as any).__gridInit = true;
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'g' && (e.metaKey || e.ctrlKey)) {
+          e.preventDefault();
+          document.querySelector('[data-grid]')?.classList.toggle('hidden');
+        }
+      });
     }
-  });
-</script>
+    setupGridToggle();
+    document.addEventListener('astro:page-load', setupGridToggle);
+  </script>
+)}
