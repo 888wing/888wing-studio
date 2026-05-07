@@ -13,10 +13,9 @@ import MovableType from './MovableType.tsx';
     <polygon points="0,0 100,30 60,0" fill="#8B1A1A" opacity="0.5" />
     <polygon points="0,0 100,15 90,0" fill="#0A0A0A" opacity="0.4" />
   </svg>
-  <!-- TODO Phase 6 polish: straighten rotate(-7deg) on mobile via media query override -->
-  <div class="relative z-10 max-w-[1440px] mx-auto" style="transform: rotate(-7deg); transform-origin: left top;">
-    <MovableType client:load text="CHUI SIU FAI" className="font-display text-[clamp(4rem,14vw,18rem)] leading-[0.85] text-ink-black" />
-    <p class="font-mono text-2xl mt-6 text-paper bg-ink-black inline-block px-3 py-1">
+  <div class="hero-tilt relative z-10 max-w-[1440px] mx-auto">
+    <MovableType client:load text="CHUI SIU FAI" className="hero-name font-display leading-[0.85] text-ink-black" />
+    <p class="font-mono text-sm md:text-2xl mt-6 text-paper bg-ink-black inline-block px-3 py-1">
       DESIGNER · ENGINEER · AUTEUR
     </p>
   </div>
@@ -27,3 +26,17 @@ import MovableType from './MovableType.tsx';
     </span>
   </div>
 </section>
+<style>
+  .hero-tilt {
+    transform: rotate(-7deg);
+    transform-origin: left top;
+  }
+  .hero-name {
+    font-size: clamp(2.5rem, 13vw, 18rem);
+  }
+  @media (max-width: 768px) {
+    .hero-tilt {
+      transform: rotate(0deg);
+    }
+  }
+</style>

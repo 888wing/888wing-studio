@@ -42,7 +42,7 @@ export default function TopStrip() {
             'repeating-linear-gradient(to right, rgba(244,239,230,0.4) 0, rgba(244,239,230,0.4) 8px, transparent 8px, transparent 14px)',
         }}
       ></span>
-      <span className="text-paper">BUILDING THINGS. BREAKING PATTERNS. SHIPPING.</span>
+      <span className="text-paper hidden md:inline">BUILDING THINGS. BREAKING PATTERNS. SHIPPING.</span>
     </div>
   );
 }

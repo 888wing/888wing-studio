@@ -2,10 +2,10 @@
 import KineticManifesto from './KineticManifesto.tsx';
 type Phrase = { html?: string; text?: string; size: string; rotate: number; align: 'left' | 'center' | 'right'; color?: string };
 const phrases: Phrase[] = [
-  { html: '我做能 <span class="text-ink-red italic">ship</span> 的東西。', size: 'text-7xl', rotate: -2, align: 'left' },
-  { html: '不做 <span class="text-ink-red italic">demo</span>。', size: 'text-9xl', rotate: 1, align: 'left' },
-  { text: '一個人, 全端, 跨平台。', size: 'text-4xl', rotate: -1, align: 'left' },
-  { text: 'GAMES / TOOLS / AI / SaaS', size: 'text-3xl', rotate: 2, align: 'left' },
+  { html: '我做能 <span class="text-ink-red italic">ship</span> 的東西。', size: 'text-4xl md:text-7xl', rotate: -2, align: 'left' },
+  { html: '不做 <span class="text-ink-red italic">demo</span>。', size: 'text-6xl md:text-9xl', rotate: 1, align: 'left' },
+  { text: '一個人, 全端, 跨平台。', size: 'text-2xl md:text-4xl', rotate: -1, align: 'left' },
+  { text: 'GAMES / TOOLS / AI / SaaS', size: 'text-xl md:text-3xl', rotate: 2, align: 'left' },
 ];
 ---
 <section class="bg-paper px-8 py-32 border-t-4 border-ink-black">

@@ -4,3 +4,6 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+/* Defensive: never let a stray rotated/clipped element produce horizontal scroll. */
+html, body { overflow-x: hidden; }
