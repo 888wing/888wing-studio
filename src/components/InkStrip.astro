@@ -1,0 +1,33 @@
+---
+// Ink Strip — pure-CSS infinite marquee evoking a print-shop CMYK color bar.
+//
+// NOTE on palette exception: this component intentionally uses Tailwind
+// defaults `bg-cyan-500` and `bg-pink-500` (NOT in our 4-color palette of
+// paper / ink-black / ink-red / ink-yellow). The CMYK print color-bar
+// aesthetic is the whole point of the trick, and faking C+M from our
+// constrained palette would lose the reference. Treat as a sanctioned
+// exception scoped to this strip only.
+//
+// Marquee technique: track is duplicated content (84 swatches = 12 × 7) so
+// translating from translateX(0) to translateX(-50%) loops seamlessly —
+// when the first half scrolls off, the second half (identical) is in view.
+const swatches = ['C','M','Y','K','R','B','Y'];
+---
+<div class="ink-strip overflow-hidden border-t-4 border-ink-black bg-paper py-1">
+  <div class="ink-strip-track flex gap-1 whitespace-nowrap">
+    {Array.from({ length: 12 }).flatMap(() => swatches).map((s) => (
+      <span class={`ink-swatch font-mono font-bold inline-flex items-center justify-center px-4 py-2 ${
+        s === 'C' ? 'bg-cyan-500' :
+        s === 'M' ? 'bg-pink-500' :
+        s === 'Y' || s === 'B' ? 'bg-ink-yellow' :
+        s === 'K' ? 'bg-ink-black text-paper' :
+        s === 'R' ? 'bg-ink-red text-paper' : 'bg-ink-black text-paper'
+      }`}>{s}</span>
+    ))}
+  </div>
+</div>
+<style>
+  .ink-strip-track { animation: marquee 40s linear infinite; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .ink-strip-track { animation: none; } }
+</style>
