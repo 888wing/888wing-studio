@@ -25,6 +25,9 @@ export default function EnvelopeAnnex({
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 50);
     }
+    const handler = (e: Event) => setOpen((e as CustomEvent).detail === 'expanded');
+    window.addEventListener('toggle-all', handler);
+    return () => window.removeEventListener('toggle-all', handler);
   }, [id]);
 
   useEffect(() => {
