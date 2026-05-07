@@ -1,0 +1,51 @@
+---
+// Ink Strip — static "print color management bar" footer.
+//
+// Composition: 4 CMYK swatches (cyan/magenta/yellow/black), a 10-step
+// grayscale gradient bar, a 6-step red ink density bar, and an
+// algorithmic barcode SVG. No marquee — this is the static print bar.
+//
+// NOTE on palette exception: this component intentionally uses Tailwind
+// defaults `bg-cyan-400` and `bg-pink-500` (NOT in our 4-color palette of
+// paper / ink-black / ink-red / ink-yellow). The CMYK print color-bar
+// aesthetic is the whole point of the trick, and faking C+M from our
+// constrained palette would lose the reference. Treat as a sanctioned
+// exception scoped to this strip only.
+const grays = ['#F4EFE6','#E0DBD1','#C8C2B7','#AEA89D','#928C82','#76716A','#5A5650','#3F3D38','#23221F','#0A0A0A'];
+// Algorithmic barcode pattern
+const barCount = 50;
+const barWidths = Array.from({ length: barCount }).map((_, i) => 1 + ((i * 7919) % 4));
+// Pre-compute bar x-positions (cumulative widths + 1px gap each)
+let cursor = 0;
+const barXs = barWidths.map((w) => {
+  const x = cursor;
+  cursor += w + 1;
+  return x;
+});
+const barViewWidth = cursor;
+---
+<div class="ink-strip border-t-4 border-ink-black bg-paper px-4 py-3 flex items-center gap-4">
+  <!-- CMYK -->
+  <div class="flex items-center gap-1">
+    <span class="ink-swatch w-7 h-7 bg-cyan-400 inline-flex items-center justify-center font-mono text-[9px] text-ink-black font-bold">C</span>
+    <span class="ink-swatch w-7 h-7 bg-pink-500 inline-flex items-center justify-center font-mono text-[9px] text-paper font-bold">M</span>
+    <span class="ink-swatch w-7 h-7 bg-ink-yellow inline-flex items-center justify-center font-mono text-[9px] text-ink-black font-bold">Y</span>
+    <span class="ink-swatch w-7 h-7 bg-ink-black inline-flex items-center justify-center font-mono text-[9px] text-paper font-bold">K</span>
+  </div>
+  <!-- Grayscale gradient -->
+  <div class="flex flex-1 h-7">
+    {grays.map((g) => <span class="flex-1 h-full" style={`background:${g}`}></span>)}
+  </div>
+  <!-- Red ink bar -->
+  <div class="flex h-7">
+    {Array.from({ length: 6 }).map((_, i) => (
+      <span class="w-7 h-full" style={`background: rgba(139,26,26,${0.2 + i * 0.16})`}></span>
+    ))}
+  </div>
+  <!-- Barcode -->
+  <svg viewBox={`0 0 ${barViewWidth} 30`} class="h-7 w-32" preserveAspectRatio="none" aria-hidden="true">
+    {barWidths.map((w, i) => (
+      <rect x={barXs[i]} y="0" width={w} height="30" fill="#0A0A0A" />
+    ))}
+  </svg>
+</div>

@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import KineticManifesto from '../../components/KineticManifesto.tsx';
+const sample = [
+  { text: '我做能 ship 的東西。', size: 'text-7xl', rotate: -2, align: 'left' as const },
+  { text: '不做 demo。', size: 'text-9xl', rotate: 1, align: 'left' as const, color: '#8B1A1A' },
+  { text: '一個人, 全端, 跨平台。', size: 'text-5xl', rotate: -1, align: 'left' as const },
+];
+---
+<Base title="LAB / 08 kinetic">
+  <main class="p-12">
+    <div class="h-[60vh]"></div>
+    <KineticManifesto client:load phrases={sample} />
+    <a href="/lab" class="font-mono text-ink-red">← back</a>
+  </main>
+</Base>

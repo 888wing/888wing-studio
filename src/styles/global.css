@@ -1,0 +1,9 @@
+@import './tokens.css';
+@import './view-transitions.css';
+@import './print.css';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Defensive: never let a stray rotated/clipped element produce horizontal scroll. */
+html, body { overflow-x: hidden; }

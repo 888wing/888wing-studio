@@ -1,0 +1,24 @@
+@layer base {
+  :root {
+    --grid-gutter: 24px;
+    --grid-cols: 12;
+    --paper-noise-opacity: 0.04;
+  }
+  @media (max-width: 768px) {
+    :root { --grid-cols: 4; }
+  }
+  html { background: theme('colors.paper'); color: theme('colors.ink-black'); }
+  body { font-family: theme('fontFamily.mono'); }
+  /* If you need a single rounded element (e.g. registration cursor),
+     use inline style or scoped :not() selector — do NOT re-enable
+     the borderRadius plugin in tailwind.config.mjs. */
+  *, *::before, *::after { border-radius: 0 !important; }
+}
+
+@layer utilities {
+  .font-display {
+    font-stretch: 125%;
+    font-weight: 900;
+    font-variation-settings: "wdth" 125, "wght" 900;
+  }
+}

@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="404 / MISPRINT">
+  <main class="bg-paper min-h-screen flex flex-col items-center justify-center px-8 relative overflow-hidden">
+    <svg class="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <polygon points="0,0 100,0 50,100" fill="#8B1A1A"/>
+    </svg>
+    <div class="relative z-10 text-center">
+      <div class="font-mono text-ink-red text-sm mb-4">§ ERROR · 404</div>
+      <h1 class="font-display text-[20vw] leading-none -rotate-3">MISPRINT</h1>
+      <p class="font-mono mt-8">Page not in the print run.</p>
+      <a href="/" class="font-mono text-ink-red mt-4 inline-block">← BACK TO HOME</a>
+    </div>
+  </main>
+</Base>

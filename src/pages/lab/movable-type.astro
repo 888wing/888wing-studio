@@ -1,0 +1,12 @@
+---
+// src/pages/lab/movable-type.astro
+import Base from '../../layouts/Base.astro';
+import MovableType from '../../components/MovableType.tsx';
+---
+<Base title="LAB / 04 movable type">
+  <main class="p-12 min-h-screen">
+    <p class="font-mono mb-4">Reload to replay.</p>
+    <MovableType client:load text="LOOPLINE" className="font-display text-[12rem] leading-none text-ink-red" />
+    <a href="/lab" class="font-mono text-ink-red mt-12 inline-block">← back</a>
+  </main>
+</Base>

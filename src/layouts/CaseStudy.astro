@@ -1,0 +1,41 @@
+---
+import Base from './Base.astro';
+import InkStrip from '../components/InkStrip.astro';
+import ExpandToggle from '../components/ExpandToggle.tsx';
+// MDX `layout:` frontmatter passes fields under `Astro.props.frontmatter`;
+// regular .astro callers can pass them as top-level props. Support both.
+const { frontmatter } = Astro.props;
+const { title, year, role, stack, status, prev, next } = { ...Astro.props, ...(frontmatter ?? {}) };
+---
+<Base title={title}>
+  <article class="bg-paper">
+    <header class="px-8 py-24 border-b-4 border-ink-black">
+      <span class="font-mono text-ink-red text-xs">§ 01 · TITLE</span>
+      <h1 class="font-display text-[clamp(2.5rem,11vw,16rem)] leading-[0.85] mt-4 -rotate-2">{title}</h1>
+      <div class="font-mono text-sm mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div><span class="text-ink-red">YEAR</span> {year}</div>
+        <div><span class="text-ink-red">ROLE</span> {role}</div>
+        <div><span class="text-ink-red">STACK</span> {stack}</div>
+        <div><span class="text-ink-red">STATUS</span> {status}</div>
+      </div>
+    </header>
+    <ExpandToggle client:load />
+    <div class="px-8 py-16 max-w-[1200px] mx-auto prose-case">
+      <slot />
+    </div>
+    <footer class="px-8 py-12 border-t-4 border-ink-black flex justify-between font-mono">
+      {prev ? <a href={prev.href} class="text-ink-red">← {prev.label}</a> : <span/>}
+      {next ? <a href={next.href} class="text-ink-red text-right">{next.label} →</a> : <span/>}
+    </footer>
+    <InkStrip />
+  </article>
+</Base>
+
+<style is:global>
+  .prose-case h2 { @apply font-display text-5xl text-ink-red mt-16 mb-6; }
+  .prose-case h3 { @apply font-display text-3xl mt-12 mb-4; }
+  .prose-case p { @apply font-mono text-base leading-relaxed mb-4; }
+  .prose-case a { @apply underline; }
+  .prose-case ul { @apply list-disc pl-6 font-mono; }
+  .prose-case .section-num { @apply font-mono text-ink-red text-xs block mb-2; }
+</style>

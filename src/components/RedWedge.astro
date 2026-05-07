@@ -1,0 +1,58 @@
+---
+// src/components/RedWedge.astro — fixed bottom-right scroll progress wedge.
+// Note: fill="#8B1A1A" matches the `ink-red` design token in tailwind.config.mjs.
+// SVG fill cannot easily reference Tailwind tokens without inline CSS; keeping it
+// inline-explicit and the value duplicated is acceptable for this single SVG.
+---
+<div
+  id="red-wedge"
+  class="pointer-events-none fixed bottom-8 right-8 z-40 origin-bottom-right"
+  style="width:80px;height:80px;transform:scale(0) rotate(0deg)"
+>
+  <svg viewBox="0 0 100 100" class="w-full h-full">
+    <polygon points="0,100 100,100 100,0" fill="#8B1A1A" />
+  </svg>
+</div>
+
+<script>
+  import('gsap').then(({ gsap }) => {
+    import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+      gsap.registerPlugin(ScrollTrigger);
+
+      let trigger: ScrollTrigger | null = null;
+
+      function reduceMotion(): boolean {
+        return typeof window.matchMedia === 'function'
+          && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      }
+
+      function setup() {
+        teardown();
+        if (reduceMotion()) return;
+        const wedge = document.getElementById('red-wedge');
+        if (!wedge) return;
+        trigger = ScrollTrigger.create({
+          start: 'top top',
+          end: 'bottom bottom',
+          onUpdate(self) {
+            const p = self.progress;
+            gsap.to(wedge, {
+              scale: p * 1.5,
+              rotation: p * 90,
+              duration: 0.3,
+              ease: 'power2.out',
+            });
+          },
+        });
+      }
+
+      function teardown() {
+        if (trigger) { trigger.kill(); trigger = null; }
+      }
+
+      setup();
+      document.addEventListener('astro:page-load', setup);
+      document.addEventListener('astro:before-preparation', teardown);
+    });
+  });
+</script>

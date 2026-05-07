@@ -1,0 +1,54 @@
+---
+const { src, alt, dotSize = 6 } = Astro.props;
+const id = 'h' + Math.random().toString(36).slice(2, 8);
+---
+<div class="halftone-wrap relative overflow-hidden" data-halftone={id}>
+  <img src={src} alt={alt} class="block w-full h-auto" style={`filter: contrast(1.2) grayscale(1); --dot:${dotSize}px;`} />
+  <div class="halftone-mask absolute inset-0 bg-paper" style={`mask-image: radial-gradient(circle, transparent 1px, black 2px); mask-size: var(--dot) var(--dot); -webkit-mask-image: radial-gradient(circle, transparent 1px, black 2px); -webkit-mask-size: var(--dot) var(--dot);`}></div>
+</div>
+<script define:vars={{ id }}>
+  let trigger = null;
+
+  function setup() {
+    teardown();
+    if (typeof window === 'undefined') return;
+    const reduced = typeof window.matchMedia === 'function'
+      && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    Promise.all([import('gsap'), import('gsap/ScrollTrigger')]).then(([{ gsap }, { ScrollTrigger }]) => {
+      gsap.registerPlugin(ScrollTrigger);
+      const wrap = document.querySelector(`[data-halftone="${id}"]`);
+      if (!wrap) return;
+      const mask = wrap.querySelector('.halftone-mask');
+      const img = wrap.querySelector('img');
+      if (!mask || !img) return;
+
+      if (reduced) {
+        mask.style.opacity = '0';
+        img.style.filter = 'none';
+        return;
+      }
+
+      const tween = gsap.fromTo(wrap, { '--dot': '40px' }, {
+        '--dot': '0px',
+        ease: 'power3.out', duration: 1.4,
+        scrollTrigger: { trigger: wrap, start: 'top 80%', once: true },
+        onUpdate() {
+          const v = wrap.style.getPropertyValue('--dot');
+          mask.style.maskSize = `${v} ${v}`;
+          mask.style.webkitMaskSize = `${v} ${v}`;
+          if (parseFloat(v) <= 1) { mask.style.opacity = '0'; img.style.filter = 'none'; }
+        }
+      });
+      trigger = tween.scrollTrigger;
+    });
+  }
+
+  function teardown() {
+    if (trigger) { trigger.kill(); trigger = null; }
+  }
+
+  setup();
+  document.addEventListener('astro:page-load', setup);
+  document.addEventListener('astro:before-preparation', teardown);
+</script>
