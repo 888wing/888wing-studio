@@ -1,8 +1,11 @@
 import { test, expect } from '@playwright/test';
+import { waitHydrated } from './helpers';
 
 test('expand toggle opens all annexes', async ({ page }) => {
   await page.goto('/work/dova');
-  await page.getByRole('button', { name: /EXPANDED/ }).click();
+  const expandBtn = page.getByRole('button', { name: /EXPANDED/ });
+  await waitHydrated(page, expandBtn);
+  await expandBtn.click();
   await expect(page.getByRole('button', { name: /SYSTEM MAP/ })).toHaveAttribute('aria-expanded', 'true');
   // URL should reflect ?expand=all
   expect(page.url()).toContain('expand=all');
