@@ -16,7 +16,6 @@ export default {
         'tc-serif': ['"Noto Serif TC"', 'serif'],
         'tc-sans': ['"Noto Sans TC"', 'sans-serif'],
       },
-      borderRadius: { none: '0' },
       transitionTimingFunction: {
         press: 'cubic-bezier(0.7, 0, 0.3, 1)',
       },
