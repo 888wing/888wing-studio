@@ -4,6 +4,7 @@ import GridOverlay from '../components/GridOverlay.astro';
 import RegistrationCursor from '../components/RegistrationCursor.astro';
 import MotionProvider from '../components/MotionProvider.astro';
 import RedWedge from '../components/RedWedge.astro';
+import { ViewTransitions } from 'astro:transitions';
 const { title = 'CHUI SIU FAI' } = Astro.props;
 ---
 <!doctype html>
@@ -15,6 +16,7 @@ const { title = 'CHUI SIU FAI' } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@400;900&display=swap" rel="stylesheet" />
+    <ViewTransitions />
   </head>
   <body>
     <MotionProvider />
