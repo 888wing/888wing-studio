@@ -1,0 +1,15 @@
+---
+import KineticManifesto from './KineticManifesto.tsx';
+const phrases: { text: string; size: string; rotate: number; align: 'left' | 'center' | 'right'; color?: string }[] = [
+  { text: '我做能 ship 的東西。', size: 'text-6xl', rotate: -2, align: 'left' },
+  { text: '不做 demo。', size: 'text-8xl', rotate: 1, align: 'left', color: '#8B1A1A' },
+  { text: '一個人, 全端, 跨平台。', size: 'text-4xl', rotate: -1, align: 'left' },
+  { text: 'GAMES / TOOLS / AI / SaaS', size: 'text-3xl', rotate: 2, align: 'left' },
+];
+---
+<section class="bg-paper px-8 py-32 border-t-4 border-ink-black">
+  <div class="max-w-[1200px] mx-auto">
+    <span class="font-mono text-ink-red text-xs">§ MANIFESTO</span>
+    <KineticManifesto client:load phrases={phrases} />
+  </div>
+</section>
