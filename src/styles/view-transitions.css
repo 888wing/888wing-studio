@@ -5,8 +5,8 @@
   from { clip-path: polygon(100% 0, 100% 0, 100% 100%, 0 100%); }
   to { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
 }
-::view-transition-old(root) { animation: slice-out 0.5s cubic-bezier(0.7,0,0.3,1) both; }
-::view-transition-new(root) { animation: slice-in 0.5s cubic-bezier(0.7,0,0.3,1) both; }
+::view-transition-old(root) { animation: slice-out 0.7s cubic-bezier(0.7,0,0.3,1) both; }
+::view-transition-new(root) { animation: slice-in 0.7s cubic-bezier(0.7,0,0.3,1) both; }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
 }
