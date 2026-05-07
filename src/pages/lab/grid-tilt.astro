@@ -1,0 +1,14 @@
+---
+import Base from '../../layouts/Base.astro';
+import TiltGrid from '../../components/TiltGrid.tsx';
+const items = Array.from({ length: 12 }).map((_, i) => ({
+  title: `WORK ${String(i+1).padStart(2,'0')}`, tag: ['GAME','TOOL','AI','WEB'][i%4]
+}));
+---
+<Base title="LAB / 07 grid tilt">
+  <main class="p-12">
+    <h1 class="font-display text-5xl mb-8">07 · PROUN GRID TILT</h1>
+    <TiltGrid client:load items={items} />
+    <a href="/lab" class="font-mono text-ink-red mt-12 inline-block">← back</a>
+  </main>
+</Base>
