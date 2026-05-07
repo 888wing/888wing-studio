@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { waitHydrated } from './helpers';
 
 test('archive shows 23 items by default', async ({ page }) => {
   await page.goto('/archive');
@@ -9,7 +10,9 @@ test('archive shows 23 items by default', async ({ page }) => {
 
 test('GAME filter narrows the grid', async ({ page }) => {
   await page.goto('/archive');
-  await page.getByRole('button', { name: 'GAME' }).click();
+  const gameBtn = page.getByRole('button', { name: 'GAME' });
+  await waitHydrated(page, gameBtn);
+  await gameBtn.click();
   await expect(page.locator('[data-card]')).toHaveCount(6);
   await expect(page.getByText('6 ITEMS')).toBeVisible();
 });

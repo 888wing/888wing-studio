@@ -1,3 +1,8 @@
+/* Self-hosted Latin fonts (eliminates Google Fonts blocking for LCP) */
+@import '@fontsource-variable/archivo/wdth.css'; /* includes wdth + wght axes */
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/700.css';
+
 @import './tokens.css';
 @import './view-transitions.css';
 @import './print.css';

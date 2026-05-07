@@ -18,8 +18,11 @@ const { title = 'CHUI SIU FAI' } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" as="image" href="/textures/paper-noise.jpg" />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,900&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+TC:wght@400;900&family=Noto+Serif+TC:wght@900&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,900&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+TC:wght@400;900&family=Noto+Serif+TC:wght@900&display=swap" rel="stylesheet" />
+    {/* Async-load Noto TC: preload+onload pattern keeps it non-blocking. Latin renders immediately
+        (self-hosted via fontsource); CJK chars use system fallback (PingFang TC on Mac, system
+        Chinese elsewhere) until Noto TC loads, then swap. Minor FOUT acceptable for ~2.7s perf gain. */}
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;900&family=Noto+Serif+TC:wght@900&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;900&family=Noto+Serif+TC:wght@900&display=swap" rel="stylesheet" /></noscript>
     <ViewTransitions />
   </head>
   <body>
