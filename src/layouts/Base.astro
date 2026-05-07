@@ -5,6 +5,7 @@ import RegistrationCursor from '../components/RegistrationCursor.astro';
 import MotionProvider from '../components/MotionProvider.astro';
 import RedWedge from '../components/RedWedge.astro';
 import TopStrip from '../components/TopStrip.tsx';
+import SEO from '../components/SEO.astro';
 import { ViewTransitions } from 'astro:transitions';
 const { title = 'CHUI SIU FAI' } = Astro.props;
 ---
@@ -13,7 +14,8 @@ const { title = 'CHUI SIU FAI' } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <!-- TODO: replace public/og.png placeholder once Task 34 README final pass + assets land -->
+    <SEO title={title} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@400;900&display=swap" rel="stylesheet" />

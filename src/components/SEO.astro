@@ -1,0 +1,16 @@
+---
+const {
+  title = 'CHUI SIU FAI',
+  description = 'Designer / engineer / auteur. Hong Kong.',
+  image = '/og.png',
+} = Astro.props;
+const url = new URL(Astro.url.pathname, Astro.site || 'http://localhost:4321');
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+<meta property="og:url" content={url} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#F4EFE6" />
