@@ -1,0 +1,45 @@
+---
+// src/components/RegistrationCursor.astro
+---
+<div id="reg-cursor" class="pointer-events-none fixed left-0 top-0 z-[9999] mix-blend-difference" style="will-change:transform;transform:translate(-100px,-100px)">
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+    <circle cx="16" cy="16" r="14" stroke="white" stroke-width="1.5" />
+    <line x1="16" y1="2" x2="16" y2="30" stroke="white" stroke-width="1.5" />
+    <line x1="2" y1="16" x2="30" y2="16" stroke="white" stroke-width="1.5" />
+  </svg>
+</div>
+<script>
+  function initRegCursor() {
+    if ((window as any).__cursorInit) return;
+
+    // Touch device — bail out
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
+
+    // Reduced motion — let native cursor show
+    if (typeof window.matchMedia === 'function' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
+    const cursor = document.getElementById('reg-cursor');
+    if (!cursor) return;
+    (window as any).__cursorInit = true;
+
+    let x = 0, y = 0, tx = 0, ty = 0, scale = 1;
+    document.addEventListener('mousemove', (e) => { tx = e.clientX - 16; ty = e.clientY - 16; });
+    function loop() {
+      x += (tx - x) * 0.25;
+      y += (ty - y) * 0.25;
+      cursor!.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+      requestAnimationFrame(loop);
+    }
+    loop();
+    document.querySelectorAll('a, button').forEach((el) => {
+      el.addEventListener('mouseenter', () => { scale = 1.8; });
+      el.addEventListener('mouseleave', () => { scale = 1; });
+    });
+    document.body.style.cursor = 'none';
+  }
+  initRegCursor();
+  document.addEventListener('astro:page-load', initRegCursor);
+</script>

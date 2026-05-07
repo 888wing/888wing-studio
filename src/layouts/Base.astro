@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import GridOverlay from '../components/GridOverlay.astro';
+import RegistrationCursor from '../components/RegistrationCursor.astro';
 const { title = 'CHUI SIU FAI' } = Astro.props;
 ---
 <!doctype html>
@@ -15,6 +16,7 @@ const { title = 'CHUI SIU FAI' } = Astro.props;
   </head>
   <body>
     <GridOverlay />
+    <RegistrationCursor />
     <slot />
   </body>
 </html>
