@@ -1,0 +1,44 @@
+---
+// src/components/MotionProvider.astro
+---
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import Lenis from 'lenis';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  let lenis: Lenis | null = null;
+  let tickerFn: ((time: number) => void) | null = null;
+
+  function reduceMotion(): boolean {
+    return typeof window.matchMedia === 'function'
+      && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  function teardown() {
+    if (tickerFn) { gsap.ticker.remove(tickerFn); tickerFn = null; }
+    if (lenis) { lenis.destroy(); lenis = null; }
+  }
+
+  function setup() {
+    teardown();
+    if (reduceMotion()) return;
+    lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
+    lenis.on('scroll', ScrollTrigger.update);
+    tickerFn = (time) => lenis!.raf(time * 1000);
+    gsap.ticker.add(tickerFn);
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  // Expose for devtools
+  (window as any).gsap = gsap;
+  (window as any).ScrollTrigger = ScrollTrigger;
+
+  setup();
+  document.addEventListener('astro:page-load', setup);
+  document.addEventListener('astro:before-preparation', teardown);
+</script>
