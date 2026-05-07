@@ -2,7 +2,8 @@
 const {
   title = 'CHUI SIU FAI',
   description = 'Designer / engineer / auteur. Hong Kong.',
-  image = '/og.png',
+  // TODO: replace /og.svg with a rasterized /og.png for broader Twitter/Facebook compatibility.
+  image = '/og.svg',
 } = Astro.props;
 const url = new URL(Astro.url.pathname, Astro.site || 'http://localhost:4321');
 ---

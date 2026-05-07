@@ -19,15 +19,19 @@ export default function EnvelopeAnnex({
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const start = shouldStartOpen(id, window.location.search, window.location.hash);
+    let timer: ReturnType<typeof setTimeout> | null = null;
     if (start) {
       setOpen(true);
-      setTimeout(() => {
+      timer = setTimeout(() => {
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 50);
     }
     const handler = (e: Event) => setOpen((e as CustomEvent).detail === 'expanded');
     window.addEventListener('toggle-all', handler);
-    return () => window.removeEventListener('toggle-all', handler);
+    return () => {
+      if (timer) clearTimeout(timer);
+      window.removeEventListener('toggle-all', handler);
+    };
   }, [id]);
 
   useEffect(() => {

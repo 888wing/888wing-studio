@@ -1,9 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
+// 03 Diagonal Slice removed: implemented as a global view-transition CSS, not a standalone page.
 const tricks = [
   ['01', 'Press Assembly', '/lab/press-assembly'],
   ['02', 'Red Wedge', '/lab/red-wedge'],
-  ['03', 'Diagonal Slice', '/lab/diagonal-slice'],
   ['04', 'Movable Type', '/lab/movable-type'],
   ['05', 'Halftone Reveal', '/lab/halftone-reveal'],
   ['06', 'Registration Cursor', '/lab/cursor'],
@@ -13,9 +13,9 @@ const tricks = [
   ['10', 'Ink Strip', '/lab/ink-strip'],
 ];
 ---
-<Base title="LAB / 10 TRICKS">
+<Base title="LAB / 09 TRICKS + 01 GLOBAL">
   <main class="p-12">
-    <h1 class="font-display text-7xl mb-12">LAB · 10 TRICKS</h1>
+    <h1 class="font-display text-7xl mb-12">LAB · 09 TRICKS + 01 GLOBAL</h1>
     <ul class="space-y-2 font-mono text-xl">
       {tricks.map(([num, name, href]) => (
         <li>
@@ -25,5 +25,8 @@ const tricks = [
         </li>
       ))}
     </ul>
+    <p class="font-mono text-xs text-ink-red/80 mt-12">
+      03 · DIAGONAL SLICE = the page transition itself. Click any link to trigger.
+    </p>
   </main>
 </Base>
